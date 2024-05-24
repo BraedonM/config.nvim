@@ -35,3 +35,5 @@ Everything should auto-install upon first run (`:Lazy` for more plugin info):
 ```
 $ nvim
 ```
+#### Plugin Config
+- For GitHub Copilot, use `:Copilot auth` to connect your GitHub account to begin using Copilot.

@@ -146,9 +146,9 @@ require('lazy').setup({
         enable = true,
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         -- If you are experiencing weird indenting issues, add the language here
-        additional_vim_regex_highlighting = { 'ruby' },
+        additional_vim_regex_highlighting = { 'ruby', 'markdown' },
       },
-      indent = { enable = true, disable = { 'ruby' } },
+      indent = { enable = true, disable = { 'ruby', 'markdown' } },
     },
     config = function(_, opts)
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
@@ -194,6 +194,24 @@ require('lazy').setup({
         -- javascript = { { "prettierd", "prettier" } },
       },
     },
+  },
+
+  { -- Terminal window
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = function()
+      require('toggleterm').setup {
+        size = 80,
+        open_mapping = [[<C-t>]],
+        shade_terminals = true,
+        start_in_insert = true,
+        insert_mappings = true,
+        persist_size = true,
+        direction = 'vertical',
+        close_on_exit = true,
+        shell = vim.o.shell,
+      }
+    end,
   },
 
   ------------------------------------
