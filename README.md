@@ -25,6 +25,13 @@ sudo apt install make gcc ripgrep unzip git xclip
 - A [Nerd Font](https://www.nerdfonts.com/): optional, provides various icons
   - If you have it set `vim.g.have_nerd_font` in `init.lua` to true
   - I use [JetBrainsMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip)
+- Node.js is required for the GitHub Copilot plugin
+```bash
+# Install nvm
+$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+# Install node
+$ nvm install node
+```
 
 ### Clone This Repo
 
