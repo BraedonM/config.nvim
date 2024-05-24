@@ -26,15 +26,18 @@ sudo apt install make gcc ripgrep unzip git xclip
   - If you have it set `vim.g.have_nerd_font` in `init.lua` to true
   - I use [JetBrainsMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip)
 
-#### Clone This Repo
+### Clone This Repo
 
 ```
 git clone https://github.com/BraedonM/config.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 ```
 
-Everything should auto-install upon first run (`:Lazy` for more plugin info):
+Everything should auto-install upon first run:
 ```
 $ nvim
 ```
-#### Plugin Config
+
+### Plugin Config
+
+- To view plugin information, use `:Lazy`
 - For GitHub Copilot, use `:Copilot auth` to connect your GitHub account to begin using Copilot.
