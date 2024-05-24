@@ -23,7 +23,8 @@ This is for the latest stable Neovim installation, since `sudo` does not get lat
 sudo apt install make gcc ripgrep unzip git xclip
 ```
 - A [Nerd Font](https://www.nerdfonts.com/): optional, provides various icons
-  - if you have it set `vim.g.have_nerd_font` in `init.lua` to true
+  - If you have it set `vim.g.have_nerd_font` in `init.lua` to true
+  - I use [JetBrainsMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip)
 
 #### Clone This Repo
 
