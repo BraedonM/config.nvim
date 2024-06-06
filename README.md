@@ -11,8 +11,7 @@ This is for the latest stable Neovim installation, since `sudo` does not get lat
 1. Install `homebrew` (if it is not already installed) and follow the given instructions:
 	`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 2. `brew install neovim`
-	Neovim should be installed in `~/.config/nvim/`
-3. Clone this repo into `~/.config/nvim/`
+	- Neovim should be installed in `~/.config/nvim/`
 
 ### Install External Dependencies
 
