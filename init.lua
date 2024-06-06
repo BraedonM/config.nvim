@@ -31,6 +31,9 @@ vim.cmd [[highlight ColorColumn ctermbg=0 guibg=lightgrey]] -- Set color of colu
 -- [[ Basic Keymaps ]]
 -- See `:help vim.keymap.set()`
 
+-- Open oil file explorer
+vim.keymap.set('n', '<leader>o', '<cmd>Oil<CR>', { desc = 'Open [O]il file explorer' })
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -336,6 +339,17 @@ require('lazy').setup({
   -- 'VimEnter' loads which-key before all the UI elements are loaded.
   -- Events can be normal autocommands events (`:help autocmd-events`).
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
+
+  {
+    'stevearc/oil.nvim',
+    config = function()
+      require('oil').setup {
+        keymaps = {
+          [','] = 'actions.parent',
+        },
+      }
+    end,
+  },
 
   { -- Fuzzy Finder (files, lsp, workspace, etc) with Telescope (See :Telecope help-tags)
     'nvim-telescope/telescope.nvim',
