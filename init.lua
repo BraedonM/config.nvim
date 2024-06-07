@@ -10,7 +10,7 @@ vim.opt.number = true -- Make line numbers default
 vim.opt.relativenumber = true -- Enable relative line numbers
 vim.opt.mouse = 'a' -- Enable mouse mode
 vim.opt.showmode = false -- Don't show the mode, already in the status line
-vim.opt.clipboard = 'unnamedplus' -- Sync Neovim with OS clipboard
+--vim.opt.clipboard = 'unnamedplus' -- Sync Neovim with OS clipboard, kills startup time so put in lazy instead
 vim.opt.breakindent = true -- Enable break indent
 vim.opt.undofile = true -- Save undo history
 vim.opt.ignorecase = true -- Case-insensitive searching UNLESS \C or
@@ -25,7 +25,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' } --  ^ See `:help
 vim.opt.inccommand = 'split' -- Preview substitutions live as you type
 vim.opt.cursorline = true -- Show which line your cursor is on
 vim.opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor
-vim.opt.colorcolumn = '79' -- Highlight column 79
+vim.opt.colorcolumn = '80' -- Highlight column 80
 vim.cmd [[highlight ColorColumn ctermbg=0 guibg=lightgrey]] -- Set color of column
 
 -- [[ Basic Keymaps ]]
@@ -347,8 +347,15 @@ require('lazy').setup({
         keymaps = {
           [','] = 'actions.parent',
         },
+        view_options = {
+          show_hidden = true,
+        },
       }
     end,
+  },
+
+  {
+    'EtiamNullam/deferred-clipboard.nvim', -- Defer clipboard operations, saves startup time
   },
 
   { -- Fuzzy Finder (files, lsp, workspace, etc) with Telescope (See :Telecope help-tags)
@@ -689,6 +696,10 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'dstein64/vim-startuptime', -- Measure startup time
+  },
+
   -- Kickstart included plugins
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
@@ -702,7 +713,7 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {
   ui = {
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
