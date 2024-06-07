@@ -358,6 +358,10 @@ require('lazy').setup({
     'EtiamNullam/deferred-clipboard.nvim', -- Defer clipboard operations, saves startup time
   },
 
+  {
+    'wesQ3/vim-windowswap', -- Swap windows effectively, <leader>ww on each window to swap
+  },
+
   { -- Fuzzy Finder (files, lsp, workspace, etc) with Telescope (See :Telecope help-tags)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
