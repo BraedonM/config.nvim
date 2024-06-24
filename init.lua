@@ -206,7 +206,8 @@ require('lazy').setup({
       require('toggleterm').setup {
         size = 80,
         open_mapping = [[<C-t>]],
-        shade_terminals = true,
+        autochdir = true,
+        shade_terminals = false,
         start_in_insert = true,
         insert_mappings = true,
         persist_size = true,
