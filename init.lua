@@ -27,6 +27,7 @@ vim.opt.cursorline = true -- Show which line your cursor is on
 vim.opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor
 vim.opt.colorcolumn = '80' -- Highlight column 80
 vim.cmd [[highlight ColorColumn ctermbg=0 guibg=lightgrey]] -- Set color of column
+vim.opt.autochdir = true -- Change directory to the file in the current buffer
 
 -- [[ Basic Keymaps ]]
 -- See `:help vim.keymap.set()`
@@ -207,7 +208,7 @@ require('lazy').setup({
         size = 80,
         open_mapping = [[<C-t>]],
         autochdir = true,
-        shade_terminals = false,
+        shade_terminals = true,
         start_in_insert = true,
         insert_mappings = true,
         persist_size = true,
