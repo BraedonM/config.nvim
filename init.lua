@@ -205,7 +205,7 @@ require('lazy').setup({
     version = '*',
     config = function()
       require('toggleterm').setup {
-        size = 80,
+        size = 100,
         open_mapping = [[<C-t>]],
         autochdir = true,
         shade_terminals = true,
