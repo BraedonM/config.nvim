@@ -728,6 +728,57 @@ require('lazy').setup({
     'dstein64/vim-startuptime', -- Measure startup time
   },
 
+  {
+    'linux-cultist/venv-selector.nvim',
+    dependencies = {
+      'neovim/nvim-lspconfig',
+      'mfussenegger/nvim-dap',
+      'mfussenegger/nvim-dap-python', --optional
+      { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
+    },
+    lazy = false,
+    branch = 'regexp', -- This is the regexp branch, use this for the new version
+    config = function()
+      require('venv-selector').setup()
+    end,
+    keys = {
+      { '<leader>vs', '<cmd>VenvSelect<cr>' },
+    },
+  },
+
+  -- {
+  --   'linux-cultist/venv-selector.nvim',
+  --   dependencies = {
+  --     'neovim/nvim-lspconfig',
+  --     { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
+  --     'mfussenegger/nvim-dap',
+  --     'mfussenegger/nvim-dap-python',
+  --   },
+  --   lazy = false,
+  --   dev = true,
+  --   branch = 'regexp',
+  --   config = function()
+  --     require('venv-selector').setup {
+  --       settings = {
+  --         options = {
+  --           on_venv_activate_callback = nil, -- callback function for after a venv activates
+  --           enable_default_searches = true, -- switches all default searches on/off
+  --           enable_cached_venvs = true, -- use cached venvs that are activated automatically when a python file is registered with the LSP.
+  --           cached_venv_automatic_activation = true, -- if set to false, the VenvSelectCached command becomes available to manually activate them.
+  --           activate_venv_in_terminal = true, -- activate the selected python interpreter in terminal windows opened from neovim
+  --           set_environment_variables = true, -- sets VIRTUAL_ENV or CONDA_PREFIX environment variables
+  --           notify_user_on_venv_activation = false, -- notifies user on activation of the virtual env
+  --           search_timeout = 5, -- if a search takes longer than this many seconds, stop it and alert the user
+  --           debug = false, -- enables you to run the VenvSelectLog command to view debug logs
+  --         },
+  --       },
+  --     }
+  --   end,
+  --   keys = {
+  --     { ',v', '<cmd>VenvSelect<cr>' },
+  --   },
+  -- },
+
   -- Kickstart included plugins
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',

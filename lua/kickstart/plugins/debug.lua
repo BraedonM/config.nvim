@@ -23,10 +23,12 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    'mfussenegger/nvim-dap-python',
   },
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+    require('dap-python').setup '~/.pyenv/versions/venvwsl/bin/python'
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
