@@ -79,7 +79,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
 
   ----------------------
-  -- [ Colorschemes ] --
+  -- [ Aesthetics ] --
   ----------------------
 
   {
@@ -89,18 +89,24 @@ require('lazy').setup({
       vim.cmd 'colorscheme vscode'
     end,
   },
-
-  'martinsione/darkplus.nvim', -- darkplus
-
   {
     'catppuccin/nvim', -- catppuccin
     name = 'catppuccin',
   },
-
   {
     'folke/tokyonight.nvim', -- tokyonight
     init = function()
       vim.cmd.hi 'Comment gui=none' -- Configure highlights
+    end,
+  },
+  'rebelot/kanagawa.nvim', -- kanagawa
+
+  {
+    'iamcco/markdown-preview.nvim', -- Markdown Previewer (:MarkdownPreview)
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    ft = { 'markdown' },
+    build = function()
+      vim.fn['mkdp#util#install']()
     end,
   },
 
@@ -347,8 +353,24 @@ require('lazy').setup({
     config = function()
       require('oil').setup {
         keymaps = {
+          ['g?'] = 'actions.show_help',
+          ['<CR>'] = 'actions.select',
+          ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
+          ['<C-s>'] = { 'actions.select', opts = { horizontal = true } },
+          ['<C-t>'] = { 'actions.select', opts = { tab = true } },
+          ['<C-p>'] = 'actions.preview',
+          ['<C-c>'] = 'actions.close',
+          ['n'] = 'actions.refresh',
           [','] = 'actions.parent',
+          ['_'] = 'actions.open_cwd',
+          ['`'] = 'actions.cd',
+          ['~'] = { 'actions.cd', opts = { scope = 'tab' } },
+          ['gs'] = 'actions.change_sort',
+          ['gx'] = 'actions.open_external',
+          ['g.'] = 'actions.toggle_hidden',
+          ['g\\'] = 'actions.toggle_trash',
         },
+        use_default_keymaps = false,
         view_options = {
           show_hidden = true,
         },
