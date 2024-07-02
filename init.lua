@@ -238,7 +238,7 @@ require('lazy').setup({
         suggestion = {
           auto_trigger = true,
           keymap = {
-            accept = '<TAB>',
+            accept = '<Tab>',
           },
         },
       }
@@ -308,8 +308,8 @@ require('lazy').setup({
           ['<C-b>'] = cmp.mapping.scroll_docs(-4), -- Scroll the documentation window [b]ack
           ['<C-f>'] = cmp.mapping.scroll_docs(4), -- Scroll the documentation window [f]orward
           ['<CR>'] = cmp.mapping.confirm { select = true }, -- Accept ([y]es) the completion
-          ['<Tab>'] = cmp.mapping.select_next_item(),
-          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+          -- ['<Tab>'] = cmp.mapping.select_next_item(),
+          -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
           ['<C-Space>'] = cmp.mapping.complete {}, -- Manually trigger a completion from nvim-cmp
 
           -- Think of <c-l> as moving to the right of your snippet expansion.
