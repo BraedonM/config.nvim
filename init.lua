@@ -32,32 +32,27 @@ vim.opt.autochdir = true -- Change directory to the file in the current buffer
 -- [[ Basic Keymaps ]]
 -- See `:help vim.keymap.set()`
 
--- Open oil file explorer
-vim.keymap.set('n', '<leader>o', '<cmd>Oil<CR>', { desc = 'Open [O]il file explorer' })
-
--- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = true
+vim.opt.hlsearch = true -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }) -- Exit terminal
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- Exit terminal
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
--- Open markdown preview
-vim.keymap.set('n', '<leader>mp', '<cmd>MarkdownPreviewToggle<CR>', { desc = 'Open [M]arkdown [P]review' })
-
 -- Use CTRL+<hjkl> to switch between windows (See `:help wincmd` for a list of all window commands)
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Personal added keymaps (none yet)
+-- Personal added keymaps
+vim.keymap.set('n', '<leader>o', '<cmd>Oil<CR>', { desc = 'Open [O]il file explorer' }) -- Open oil file explorer
+vim.keymap.set('n', '<leader>mp', '<cmd>MarkdownPreviewToggle<CR>', { desc = 'Open [M]arkdown [P]review' }) -- Open markdown preview
+vim.keymap.set('n', '<A-j>', ':m .+1<CR>==') -- move line up(n)
+vim.keymap.set('n', '<A-k>', ':m .-2<CR>==') -- move line down(n)
+vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv") -- move line up(v)
+vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv") -- move line down(v)
 
 -- [[ Basic Autocommands ]]
 -- See `:help lua-guide-autocommands`
@@ -140,14 +135,6 @@ require('lazy').setup({
     end,
   },
 
-  --[[	{  -- File Explorer Tab
-	'nvim-tree/nvim-tree.lua',
-	config = function()
-		require("nvim-tree").setup()
-	end,
-	},
---]]
-
   { 'nvim-treesitter/nvim-treesitter-context' },
 
   { -- Highlight, edit, and navigate code
@@ -170,7 +157,10 @@ require('lazy').setup({
       require('nvim-treesitter.install').prefer_git = true
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
-      require('treesitter-context').setup { enable = true }
+      require('treesitter-context').setup {
+        enable = true,
+        multiline_threshold = 10,
+      }
     end,
   },
 
@@ -230,6 +220,25 @@ require('lazy').setup({
       }
     end,
   },
+
+  -- { -- tmux
+  --   'aserowy/tmux.nvim',
+  --   config = function()
+  --     require('tmux').setup {
+  --       copy_sync = {
+  --         enable = true,
+  --         redirect_to_clipboard = true,
+  --         redirect_to_paste = true,
+  --       },
+  --       navigation = {
+  --         enable_default_keybindings = true,
+  --       },
+  --       resize = {
+  --         enable_default_keybindings = true,
+  --       },
+  --     }
+  --   end,
+  -- },
 
   ------------------------------------
   -- [ Text Editing Functionality ] --
@@ -382,6 +391,10 @@ require('lazy').setup({
         use_default_keymaps = false,
         view_options = {
           show_hidden = true,
+        },
+        columns = {
+          -- 'size',
+          'icon',
         },
       }
     end,
@@ -705,7 +718,7 @@ require('lazy').setup({
   },
 
   -------------------------
-  -- [[ Other Plugins ]] --
+  -- [ Other Plugins ] --
   -------------------------
 
   { -- Collection of various small independent plugins/modules
@@ -803,7 +816,7 @@ require('lazy').setup({
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.neo-tree',
+  -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
