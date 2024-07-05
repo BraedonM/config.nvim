@@ -48,7 +48,10 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Exit terminal
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
---  Use CTRL+<hjkl> to switch between windows (See `:help wincmd` for a list of all window commands)
+-- Open markdown preview
+vim.keymap.set('n', '<leader>mp', '<cmd>MarkdownPreviewToggle<CR>', { desc = 'Open [M]arkdown [P]review' })
+
+-- Use CTRL+<hjkl> to switch between windows (See `:help wincmd` for a list of all window commands)
 vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
@@ -145,6 +148,8 @@ require('lazy').setup({
 	},
 --]]
 
+  { 'nvim-treesitter/nvim-treesitter-context' },
+
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
@@ -165,6 +170,7 @@ require('lazy').setup({
       require('nvim-treesitter.install').prefer_git = true
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
+      require('treesitter-context').setup { enable = true }
     end,
   },
 
@@ -240,6 +246,9 @@ require('lazy').setup({
           keymap = {
             accept = '<Tab>',
           },
+        },
+        filetypes = {
+          ['*'] = true,
         },
       }
     end,
@@ -627,7 +636,17 @@ require('lazy').setup({
       local servers = {
         -- clangd = {},
         -- gopls = {},
-        -- pyright = {},
+        pyright = {
+          settings = {
+            python = {
+              analysis = {
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                typeCheckingMode = 'off',
+              },
+            },
+          },
+        },
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
