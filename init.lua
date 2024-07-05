@@ -41,18 +41,18 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 -- Use CTRL+<hjkl> to switch between windows (See `:help wincmd` for a list of all window commands)
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Personal added keymaps
 vim.keymap.set('n', '<leader>o', '<cmd>Oil<CR>', { desc = 'Open [O]il file explorer' }) -- Open oil file explorer
 vim.keymap.set('n', '<leader>mp', '<cmd>MarkdownPreviewToggle<CR>', { desc = 'Open [M]arkdown [P]review' }) -- Open markdown preview
-vim.keymap.set('n', '<A-j>', ':m .+1<CR>==') -- move line up(n)
-vim.keymap.set('n', '<A-k>', ':m .-2<CR>==') -- move line down(n)
-vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv") -- move line up(v)
-vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv") -- move line down(v)
+vim.keymap.set('n', '<A-m>', ':m .+1<CR>==') -- move line up(n)
+vim.keymap.set('n', '<A-,>', ':m .-2<CR>==') -- move line down(n)
+vim.keymap.set('v', '<A-m>', ":m '>+1<CR>gv=gv") -- move line up(v)
+vim.keymap.set('v', '<A-,>', ":m '<-2<CR>gv=gv") -- move line down(v)
 
 -- [[ Basic Autocommands ]]
 -- See `:help lua-guide-autocommands`
@@ -221,24 +221,24 @@ require('lazy').setup({
     end,
   },
 
-  -- { -- tmux
-  --   'aserowy/tmux.nvim',
-  --   config = function()
-  --     require('tmux').setup {
-  --       copy_sync = {
-  --         enable = true,
-  --         redirect_to_clipboard = true,
-  --         redirect_to_paste = true,
-  --       },
-  --       navigation = {
-  --         enable_default_keybindings = true,
-  --       },
-  --       resize = {
-  --         enable_default_keybindings = true,
-  --       },
-  --     }
-  --   end,
-  -- },
+  { -- tmux
+    'aserowy/tmux.nvim',
+    config = function()
+      require('tmux').setup {
+        copy_sync = {
+          enable = true,
+          redirect_to_clipboard = true,
+          redirect_to_paste = true,
+        },
+        navigation = {
+          enable_default_keybindings = true,
+        },
+        resize = {
+          enable_default_keybindings = true,
+        },
+      }
+    end,
+  },
 
   ------------------------------------
   -- [ Text Editing Functionality ] --
