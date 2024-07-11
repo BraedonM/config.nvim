@@ -25,7 +25,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' } --  ^ See `:help
 vim.opt.inccommand = 'split' -- Preview substitutions live as you type
 vim.opt.cursorline = true -- Show which line your cursor is on
 vim.opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor
-vim.opt.colorcolumn = '80' -- Highlight column 80
+vim.opt.colorcolumn = '80' -- Highlight column 80init
 vim.cmd [[highlight ColorColumn ctermbg=0 guibg=lightgrey]] -- Set color of column
 vim.opt.autochdir = true -- Change directory to the file in the current buffer
 
@@ -49,10 +49,11 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Personal added keymaps
 vim.keymap.set('n', '<leader>o', '<cmd>Oil<CR>', { desc = 'Open [O]il file explorer' }) -- Open oil file explorer
 vim.keymap.set('n', '<leader>mp', '<cmd>MarkdownPreviewToggle<CR>', { desc = 'Open [M]arkdown [P]review' }) -- Open markdown preview
-vim.keymap.set('n', '<A-m>', ':m .+1<CR>==') -- move line up(n)
-vim.keymap.set('n', '<A-,>', ':m .-2<CR>==') -- move line down(n)
-vim.keymap.set('v', '<A-m>', ":m '>+1<CR>gv=gv") -- move line up(v)
-vim.keymap.set('v', '<A-,>', ":m '<-2<CR>gv=gv") -- move line down(v)
+vim.keymap.set('n', '<A-,>', ':m .+1<CR>==') -- move line up(n)
+vim.keymap.set('n', '<A-m>', ':m .-2<CR>==') -- move line down(n)
+vim.keymap.set('v', '<A-,>', ":m '>+1<CR>gv=gv") -- move line up(v)
+vim.keymap.set('v', '<A-m>', ":m '<-2<CR>gv=gv") -- move line down(v)
+vim.keymap.set('n', '<bs>', '<C-^>') -- Switch between last two buffers
 
 -- [[ Basic Autocommands ]]
 -- See `:help lua-guide-autocommands`
@@ -79,167 +80,197 @@ require('lazy').setup({
   ----------------------
   -- [ Aesthetics ] --
   ----------------------
+  {
+    {
+      'Mofiqul/vscode.nvim', -- vscode
+      priority = 1000, -- Load this before all other start plugins
+      config = function()
+        vim.cmd 'colorscheme vscode'
+      end,
+    },
+    {
+      'catppuccin/nvim', -- catppuccin
+      name = 'catppuccin',
+    },
+    {
+      'folke/tokyonight.nvim', -- tokyonight
+      init = function()
+        vim.cmd.hi 'Comment gui=none' -- Configure highlights
+      end,
+    },
+    {
+      'rebelot/kanagawa.nvim', -- kanagawa
+    },
 
-  {
-    'Mofiqul/vscode.nvim', -- vscode
-    priority = 1000, -- Load this before all other start plugins
-    config = function()
-      vim.cmd 'colorscheme vscode'
-    end,
-  },
-  {
-    'catppuccin/nvim', -- catppuccin
-    name = 'catppuccin',
-  },
-  {
-    'folke/tokyonight.nvim', -- tokyonight
-    init = function()
-      vim.cmd.hi 'Comment gui=none' -- Configure highlights
-    end,
-  },
-  'rebelot/kanagawa.nvim', -- kanagawa
+    {
+      'nvim-lualine/lualine.nvim', -- Status line configuration
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true },
+      config = function()
+        require('lualine').setup {
+          options = {
+            theme = 'onedark',
+          },
+          sections = {
+            lualine_a = { 'mode' }, -- Normal, Insert, Visual, etc.
+            lualine_b = { 'branch', 'diff' }, -- Git branch, diff
+            lualine_c = { 'vim.fn.expand("%:p")' }, -- Full path to the file
+            lualine_x = { 'os.date("%I:%M %p")' }, -- Buffer list, current time
+            lualine_y = { 'filetype', 'filesize' }, -- Current filetype
+            lualine_z = { 'location' }, -- Line and column in the file
+          },
+          inactive_sections = {
+            lualine_a = {},
+            lualine_b = { 'filename' },
+            lualine_c = {},
+            lualine_x = { 'filesize' },
+            lualine_y = { 'filetype' },
+            lualine_z = {},
+          },
+        }
+      end,
+    },
 
-  {
-    'iamcco/markdown-preview.nvim', -- Markdown Previewer (:MarkdownPreview)
-    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
-    ft = { 'markdown' },
-    build = function()
-      vim.fn['mkdp#util#install']()
-    end,
+    {
+      'iamcco/markdown-preview.nvim', -- Markdown Previewer (:MarkdownPreview)
+      cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+      ft = { 'markdown' },
+      build = function()
+        vim.fn['mkdp#util#install']()
+      end,
+    },
   },
-
   ------------------------
   -- [ User Interface ] --
   ------------------------
-
   {
-    'folke/which-key.nvim', -- Useful plugin to show you pending keybinds.
-    event = 'VimEnter', -- Sets the loading event to 'VimEnter'
-    config = function() -- This is the function that runs, AFTER loading
-      require('which-key').setup()
+    {
+      'folke/which-key.nvim', -- Useful plugin to show you pending keybinds.
+      event = 'VimEnter', -- Sets the loading event to 'VimEnter'
+      config = function() -- This is the function that runs, AFTER loading
+        require('which-key').setup()
 
-      -- Document existing key chains
-      require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
-      }
-      -- Visual mode
-      require('which-key').register({
-        ['<leader>h'] = { 'Git [H]unk' },
-      }, { mode = 'v' })
-    end,
-  },
-
-  { 'nvim-treesitter/nvim-treesitter-context' },
-
-  { -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
-      -- Autoinstall languages that are not installed
-      auto_install = true,
-      highlight = {
-        enable = true,
-        -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
-        -- If you are experiencing weird indenting issues, add the language here
-        additional_vim_regex_highlighting = { 'ruby', 'markdown' },
-      },
-      indent = { enable = true, disable = { 'ruby', 'markdown' } },
+        -- Document existing key chains
+        require('which-key').register {
+          ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+          ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+          ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+          ['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+          ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+          ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
+          ['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+        }
+        -- Visual mode
+        require('which-key').register({
+          ['<leader>h'] = { 'Git [H]unk' },
+        }, { mode = 'v' })
+      end,
     },
-    config = function(_, opts)
-      -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
-      require('nvim-treesitter.install').prefer_git = true
-      ---@diagnostic disable-next-line: missing-fields
-      require('nvim-treesitter.configs').setup(opts)
-      require('treesitter-context').setup {
-        enable = true,
-        multiline_threshold = 10,
-      }
-    end,
-  },
 
-  -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+    { 'nvim-treesitter/nvim-treesitter-context' },
 
-  { -- Autoformat
-    'stevearc/conform.nvim',
-    lazy = false,
-    keys = {
-      {
-        '<leader>f',
-        function()
-          require('conform').format { async = true, lsp_fallback = true }
-        end,
-        mode = '',
-        desc = '[F]ormat buffer',
+    { -- Highlight, edit, and navigate code
+      'nvim-treesitter/nvim-treesitter',
+      build = ':TSUpdate',
+      opts = {
+        ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+        -- Autoinstall languages that are not installed
+        auto_install = true,
+        highlight = {
+          enable = true,
+          -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
+          -- If you are experiencing weird indenting issues, add the language here
+          additional_vim_regex_highlighting = { 'ruby', 'markdown' },
+        },
+        indent = { enable = true, disable = { 'ruby', 'markdown' } },
       },
-    },
-    opts = {
-      notify_on_error = false,
-      format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
-        -- have a well standardized coding style. You can add additional
-        -- languages here or re-enable it for the disabled ones.
-        local disable_filetypes = { c = true, cpp = true }
-        return {
-          timeout_ms = 500,
-          lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+      config = function(_, opts)
+        -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+        require('nvim-treesitter.install').prefer_git = true
+        ---@diagnostic disable-next-line: missing-fields
+        require('nvim-treesitter.configs').setup(opts)
+        require('treesitter-context').setup {
+          enable = true,
+          multiline_threshold = 10,
         }
       end,
-      formatters_by_ft = {
-        lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        -- You can use a sub-list to tell conform to run *until* a formatter is found
-        -- javascript = { { "prettierd", "prettier" } },
+    },
+
+    -- Highlight todo, notes, etc in comments
+    { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+
+    { -- Autoformat
+      'stevearc/conform.nvim',
+      lazy = false,
+      keys = {
+        {
+          '<leader>f',
+          function()
+            require('conform').format { async = true, lsp_fallback = true }
+          end,
+          mode = '',
+          desc = '[F]ormat buffer',
+        },
+      },
+      opts = {
+        notify_on_error = false,
+        format_on_save = function(bufnr)
+          -- Disable "format_on_save lsp_fallback" for languages that don't
+          -- have a well standardized coding style. You can add additional
+          -- languages here or re-enable it for the disabled ones.
+          local disable_filetypes = { c = true, cpp = true }
+          return {
+            timeout_ms = 500,
+            lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+          }
+        end,
+        formatters_by_ft = {
+          lua = { 'stylua' },
+          -- Conform can also run multiple formatters sequentially
+          -- python = { "isort", "black" },
+          -- You can use a sub-list to tell conform to run *until* a formatter is found
+          -- javascript = { { "prettierd", "prettier" } },
+        },
       },
     },
-  },
 
-  { -- Terminal window
-    'akinsho/toggleterm.nvim',
-    version = '*',
-    config = function()
-      require('toggleterm').setup {
-        size = 100,
-        open_mapping = [[<C-t>]],
-        autochdir = true,
-        shade_terminals = true,
-        start_in_insert = true,
-        insert_mappings = true,
-        persist_size = true,
-        direction = 'vertical',
-        close_on_exit = true,
-        shell = vim.o.shell,
-      }
-    end,
-  },
+    { -- Terminal window
+      'akinsho/toggleterm.nvim',
+      version = '*',
+      config = function()
+        require('toggleterm').setup {
+          size = 100,
+          open_mapping = [[<C-t>]],
+          autochdir = true,
+          shade_terminals = true,
+          start_in_insert = true,
+          insert_mappings = true,
+          persist_size = true,
+          direction = 'vertical',
+          close_on_exit = true,
+          shell = vim.o.shell,
+        }
+      end,
+    },
 
-  { -- tmux
-    'aserowy/tmux.nvim',
-    config = function()
-      require('tmux').setup {
-        copy_sync = {
-          enable = true,
-          redirect_to_clipboard = true,
-          redirect_to_paste = true,
-        },
-        navigation = {
-          enable_default_keybindings = true,
-        },
-        resize = {
-          enable_default_keybindings = true,
-        },
-      }
-    end,
+    { -- tmux
+      'aserowy/tmux.nvim',
+      config = function()
+        require('tmux').setup {
+          copy_sync = {
+            enable = true,
+            redirect_to_clipboard = true,
+            redirect_to_paste = true,
+          },
+          navigation = {
+            enable_default_keybindings = true,
+          },
+          resize = {
+            enable_default_keybindings = true,
+          },
+        }
+      end,
+    },
   },
-
   ------------------------------------
   -- [ Text Editing Functionality ] --
   ------------------------------------
@@ -378,8 +409,8 @@ require('lazy').setup({
           ['<C-t>'] = { 'actions.select', opts = { tab = true } },
           ['<C-p>'] = 'actions.preview',
           ['<C-c>'] = 'actions.close',
-          ['n'] = 'actions.refresh',
-          [','] = 'actions.parent',
+          ['m'] = 'actions.refresh',
+          ['<Del>'] = 'actions.parent',
           ['_'] = 'actions.open_cwd',
           ['`'] = 'actions.cd',
           ['~'] = { 'actions.cd', opts = { scope = 'tab' } },
@@ -389,6 +420,8 @@ require('lazy').setup({
           ['g\\'] = 'actions.toggle_trash',
         },
         use_default_keymaps = false,
+        watch_for_changes = true,
+        skip_confirm_for_simple_edits = true,
         view_options = {
           show_hidden = true,
         },
@@ -487,6 +520,44 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+    end,
+  },
+
+  { -- Harpoon
+    'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+    },
+    config = function()
+      local harpoon = require('harpoon').setup {}
+
+      -- basic telescope configuration
+      local conf = require('telescope.config').values
+      local function toggle_telescope(harpoon_files)
+        local file_paths = {}
+        for _, item in ipairs(harpoon_files.items) do
+          table.insert(file_paths, item.value)
+        end
+
+        require('telescope.pickers')
+          .new({}, {
+            prompt_title = 'Harpoon',
+            finder = require('telescope.finders').new_table {
+              results = file_paths,
+            },
+            previewer = conf.file_previewer {},
+            sorter = conf.generic_sorter {},
+          })
+          :find()
+      end
+      vim.keymap.set('n', '<leader><bs>', function()
+        toggle_telescope(harpoon:list())
+      end, { desc = '] Harpoon List' })
+      vim.keymap.set('n', '<leader>a', function()
+        harpoon:list():add()
+      end) -- Add file to harpoon
     end,
   },
 
