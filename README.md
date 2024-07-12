@@ -6,7 +6,7 @@ Originally a fork of [**kickstart.nvim**](https://github.com/nvim-lua/kickstart.
 ### Install Neovim
 
 I run this configuration using WSL Ubuntu, so other platforms may have differences.
-This is for the latest stable Neovim installation, since `sudo` does not get latest:
+This is for the latest stable Neovim installation, since `apt` does not get latest:
 
 1. Install `homebrew` (if it is not already installed) and follow the given instructions:
 	`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
