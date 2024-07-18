@@ -10,7 +10,7 @@ vim.opt.number = true -- Make line numbers default
 vim.opt.relativenumber = true -- Enable relative line numbers
 vim.opt.mouse = 'a' -- Enable mouse mode
 vim.opt.showmode = false -- Don't show the mode, already in the status line
---vim.opt.clipboard = 'unnamedplus' -- Sync Neovim with OS clipboard, kills startup time so put in lazy instead
+vim.opt.clipboard = 'unnamedplus' -- Sync Neovim with OS clipboard, kills startup time so put in lazy instead
 vim.opt.breakindent = true -- Enable break indent
 vim.opt.undofile = true -- Save undo history
 vim.opt.ignorecase = true -- Case-insensitive searching UNLESS \C or
@@ -25,6 +25,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' } --  ^ See `:help
 vim.opt.inccommand = 'split' -- Preview substitutions live as you type
 vim.opt.cursorline = true -- Show which line your cursor is on
 vim.opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor
+vim.opt.wrap = false -- Don't wrap lines
 vim.opt.colorcolumn = '80' -- Highlight column 80init
 vim.cmd [[highlight ColorColumn ctermbg=0 guibg=lightgrey]] -- Set color of column
 vim.opt.autochdir = true -- Change directory to the file in the current buffer
@@ -40,7 +41,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
--- Use CTRL+<hjkl> to switch between windows (See `:help wincmd` for a list of all window commands)
+-- Use CTRL+<hjkl> to switch between windows (See `:help wincmd` for a list of all window commands) (now handled by tmux)
 -- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
 -- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 -- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
@@ -433,9 +434,9 @@ require('lazy').setup({
     end,
   },
 
-  {
-    'EtiamNullam/deferred-clipboard.nvim', -- Defer clipboard operations, saves startup time
-  },
+  -- {
+  --   'EtiamNullam/deferred-clipboard.nvim', -- Defer clipboard operations, saves startup time
+  -- },
 
   {
     'wesQ3/vim-windowswap', -- Swap windows effectively, <leader>ww on each window to swap
