@@ -4,7 +4,7 @@ return {
   config = function()
     require('lualine').setup {
       options = {
-        theme = 'onedark',
+        theme = 'onedark', --'kanagawa',
       },
       sections = {
         lualine_a = { 'mode' }, -- Normal, Insert, Visual, etc.
@@ -18,7 +18,7 @@ return {
         lualine_a = {},
         lualine_b = { 'filename' },
         lualine_c = {},
-        lualine_x = { 'filesize' },
+        lualine_x = { 'os.date("%I:%M %p")' },
         lualine_y = { 'filetype' },
         lualine_z = {},
       },

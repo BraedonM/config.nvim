@@ -20,6 +20,7 @@ require('lazy').setup({
   { import = 'custom.plugins' },
   { import = 'custom.plugins.native' },
   { import = 'custom.colorschemes' },
+  { dir = '~/.config/nvim/lua/custom/colorschemes/stelium', lazy = true },
 }, {
   ui = {
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
@@ -40,3 +41,6 @@ require('lazy').setup({
     },
   },
 })
+
+-- Select the colorscheme
+vim.cmd 'colorscheme kanagawa'
