@@ -29,9 +29,9 @@ return { -- Harpoon
     end
     vim.keymap.set('n', '<leader><bs>', function()
       toggle_telescope(harpoon:list())
-    end, { desc = '] Harpoon List' })
+    end, { desc = 'Harpoon List' })
     vim.keymap.set('n', '<leader>a', function()
       harpoon:list():add()
-    end) -- Add file to harpoon
+    end, { desc = 'Add file to Harpoon' }) -- Add file to harpoon
   end,
 }

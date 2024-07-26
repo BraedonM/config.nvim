@@ -21,6 +21,7 @@ require('lazy').setup({
   { import = 'custom.plugins.native' },
   { import = 'custom.colorschemes' },
   { dir = '~/.config/nvim/lua/custom/colorschemes/stelium', lazy = true },
+  { dir = '~/.config/nvim/lua/custom/colorschemes/catppuccinnnnn/', lazy = true },
 }, {
   ui = {
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
