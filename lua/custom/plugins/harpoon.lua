@@ -6,7 +6,8 @@ return { -- Harpoon
     'nvim-telescope/telescope.nvim',
   },
   config = function()
-    local harpoon = require('harpoon').setup {}
+    local harpoon = require 'harpoon'
+    harpoon:setup()
 
     -- basic telescope configuration
     local conf = require('telescope.config').values
