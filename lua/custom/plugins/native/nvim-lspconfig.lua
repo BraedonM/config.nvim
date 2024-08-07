@@ -155,7 +155,17 @@ return { -- LSP Configuration & Plugins
     --  - settings (table): Override the default settings passed when initializing the server.
     --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
-      -- clangd = {},
+      clangd = {
+        single_file_support = false,
+        filetypes = { 'c', 'cpp', 'h', 'objc', 'objcpp' },
+        settings = {
+          clangd = {
+            completion = {
+              callSnippet = 'Replace',
+            },
+          },
+        },
+      },
       -- gopls = {},
       pyright = {
         settings = {
@@ -165,9 +175,13 @@ return { -- LSP Configuration & Plugins
               useLibraryCodeForTypes = true,
               typeCheckingMode = 'off',
             },
+            completion = {
+              callSnippet = 'Replace',
+            },
           },
         },
       },
+
       -- rust_analyzer = {},
       -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
       --
@@ -194,6 +208,9 @@ return { -- LSP Configuration & Plugins
       },
     }
 
+    -- require('lspconfig').clangd.setup {
+    --   single_file_support = false,
+    -- }
     -- Ensure the servers and tools above are installed
     --  To check the current status of installed tools and/or manually install
     --  other tools, you can run
