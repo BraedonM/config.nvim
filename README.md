@@ -9,8 +9,10 @@ I run this configuration using WSL Ubuntu, so other platforms may have differenc
 This is for the latest stable Neovim installation, since `apt` does not get latest:
 
 1. Install `homebrew` (if it is not already installed) and follow the given instructions:
+
 	`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
-2. `brew install neovim`
+3. `brew install neovim`
+
 	- Neovim should be installed in `~/.config/nvim/`
 
 ### Install External Dependencies
@@ -25,10 +27,12 @@ sudo apt install make gcc ripgrep unzip git xclip
   - If you have it set `vim.g.have_nerd_font` in `init.lua` to true
   - I use [JetBrainsMono Nerd Font](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/JetBrainsMono.zip)
 - Node.js is required for the GitHub Copilot plugin
+
 Install nvm
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
 ```
+
 Install node
 ```bash
 nvm install node
