@@ -8,7 +8,6 @@ return {
         ['<CR>'] = 'actions.select',
         ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
         ['<C-s>'] = { 'actions.select', opts = { horizontal = true } },
-        ['<C-t>'] = { 'actions.select', opts = { tab = true } },
         ['<C-p>'] = 'actions.preview',
         ['<C-c>'] = 'actions.close',
         ['m'] = 'actions.refresh',

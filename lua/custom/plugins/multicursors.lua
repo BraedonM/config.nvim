@@ -1,5 +1,5 @@
 return {
-  -- Multiple cursors
+  -- Multiple cursors with <Leader>m
   'smoka7/multicursors.nvim',
   event = 'VeryLazy',
   dependencies = {

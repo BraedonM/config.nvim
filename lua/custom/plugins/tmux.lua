@@ -12,6 +12,7 @@ return { -- tmux
       },
       resize = {
         enable_default_keybindings = true,
+        resize_step_x = 3,
       },
     }
   end,

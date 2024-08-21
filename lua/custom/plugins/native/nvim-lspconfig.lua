@@ -165,6 +165,7 @@ return { -- LSP Configuration & Plugins
             },
           },
         },
+        cmd = { 'clangd', '--offset-encoding=utf-16' },
       },
       -- gopls = {},
       pyright = {
