@@ -24,5 +24,6 @@ vim.opt.cursorline = true -- Show which line your cursor is on
 vim.opt.scrolloff = 10 -- Minimal number of screen lines to keep above and below the cursor
 vim.opt.wrap = false -- Don't wrap lines
 vim.opt.colorcolumn = '80' -- Highlight column 80
-vim.opt.autochdir = true -- Change directory to the file in the current buffer
+-- This line was commented because it didn't let Harpoon work properly, since it cleared the Harpoon buffer on every file change
+-- vim.opt.autochdir = true -- Change directory to the file in the current buffer
 vim.opt.hlsearch = true -- Set highlight on search, but clear on pressing <Esc> in normal mode
