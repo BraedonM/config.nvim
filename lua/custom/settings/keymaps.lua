@@ -14,3 +14,11 @@ vim.keymap.set('n', '<A-m>', ':m .-2<CR>==') -- move line down(n)
 vim.keymap.set('v', '<A-,>', ":m '>+1<CR>gv=gv") -- move line up(v)
 vim.keymap.set('v', '<A-m>', ":m '<-2<CR>gv=gv") -- move line down(v)
 vim.keymap.set('n', '<bs>', '<C-^>') -- Switch between last two buffers
+vim.keymap.set('i', 'jj', '<Esc>') -- Exit insert mode with jj
+vim.keymap.set('n', '<leader>rr', ':RunCode<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rf', ':RunFile<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rft', ':RunFile tab<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rp', ':RunProject<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rc', ':RunClose<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>crf', ':CRFiletype<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>crp', ':CRProjects<CR>', { noremap = true, silent = false })
