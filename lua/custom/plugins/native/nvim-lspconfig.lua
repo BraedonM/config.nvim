@@ -165,7 +165,11 @@ return { -- LSP Configuration & Plugins
             },
           },
         },
-        cmd = { 'clangd', '--offset-encoding=utf-16' },
+        cmd = {
+          'clangd',
+          '--offset-encoding=utf-16',
+          '--compile-commands-dir=/mnt/c/Users/braedonm/source/transferCals-port/opensyde-kds-modified/opensyde_tool/result/tool/TransferCals/.qtc_clangd/',
+        },
       },
       -- gopls = {},
       pyright = {
@@ -209,8 +213,14 @@ return { -- LSP Configuration & Plugins
       },
     }
 
+    -- clangd settings are set above, so we don't need to set them here.
     -- require('lspconfig').clangd.setup {
-    --   single_file_support = false,
+    --   -- single_file_support = false,
+    --   cmd = {
+    --     'clangd',
+    --     '--compile-commands-dir=/mnt/c/Users/braedonm/source/transferCals-port/opensyde-kds-modified/opensyde_tool/result/tool/TransferCals/.qtc_clangd/',
+    --     '--offset-encoding=utf-16',
+    --   },
     -- }
     -- Ensure the servers and tools above are installed
     --  To check the current status of installed tools and/or manually install
